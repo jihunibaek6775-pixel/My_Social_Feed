@@ -1,0 +1,7 @@
+post_id,user_id,content,timestamp,is_retweet,original_post_id
+1,1,1,2025-08-14T13:51:56.432630,False,
+2,1,RT @chohong: 1,2025-08-14T13:58:34.848401,True,1
+3,1,안녕하세요,2025-08-14T13:58:43.642877,False,
+4,1,1,2025-08-14T15:47:05.828418,False,
+5,1,RT @chohong: 1,2025-08-14T15:47:08.551306,True,4
+6,1,1,2025-08-14T16:03:51.259503,False,

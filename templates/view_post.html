@@ -1,0 +1,50 @@
+<!-- templates/view_post.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 보기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 p-8 flex items-center justify-center min-h-screen">
+    <div class="max-w-xl w-full mx-auto bg-white rounded-lg shadow-xl p-6">
+        <header class="flex justify-between items-center mb-6 border-b pb-4">
+            <h1 class="text-3xl font-bold text-gray-800">게시글 보기</h1>
+            <a href="{{ url_for('index') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full transition-colors duration-200">
+                목록으로 돌아가기
+            </a>
+        </header>
+
+        {% if post %}
+        <div class="border-b border-gray-200 pb-4 mb-4">
+            <div class="flex items-center mb-2">
+                <p class="text-sm font-semibold text-gray-600">작성자: {{ post.username }}</p>
+                <p class="text-xs text-gray-400 ml-auto">{{ post.timestamp }}</p>
+            </div>
+            <p class="text-gray-800 text-base mb-4">{{ post.content }}</p>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-500 text-sm">좋아요: {{ post.like_count }}</span>
+                <form action="{{ url_for('like_post', post_id=post.post_id) }}" method="post" class="flex items-center">
+                    <button type="submit" class="text-red-500 hover:text-red-700 transition-colors duration-200 focus:outline-none flex items-center">
+                        <i class="{% if post.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+                        <span class="ml-1">{{ "좋아요 취소" if post.is_liked else "좋아요" }}</span>
+                    </button>
+                </form>
+                <form action="{{ url_for('retweet_post', post_id=post.post_id) }}" method="post" class="flex items-center">
+                    <button type="submit" class="text-blue-500 hover:text-blue-700 transition-colors duration-200 focus:outline-none flex items-center">
+                        <i class="fas fa-retweet"></i>
+                        <span class="ml-1">리트윗</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
